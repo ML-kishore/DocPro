@@ -1,0 +1,21 @@
+name: docpro-isolated-app
+
+services:
+  db:
+    image: postgres:latest
+    environment:
+      - POSTGRES_DB=docpro_db       # MUST match Django's 'NAME': 'docpro-db'
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=salaar28
+    ports:
+      - "5432:5432"
+    volumes:
+      - docpro_final_data:/var/lib/postgresql # Fresh volume name to skip cache
+
+  docpro-redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+  
+volumes:
+  docpro_final_data:
